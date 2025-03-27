@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  larvis-service:
+    build:
+      context: ./larvis-service
+    ports:
+      - "8080:8080"
+    container_name: larvis-service
+
+  larvis-ui:
+    build:
+      context: ./larvis-ui
+    ports:
+      - "3000:3000"
+    container_name: larvis-ui
+    depends_on:
+      - larvis-service
+    volumes:
+      - ./larvis-ui:/app
+      - /app/node_module
+    environment:
+      - NODE_OPTIONS=--no-deprecation
+      - CHOKIDAR_USEPOLLING=true
+    command: ["yarn", "start"]
