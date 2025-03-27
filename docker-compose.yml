@@ -18,8 +18,8 @@ services:
       - larvis-service
     volumes:
       - ./larvis-ui:/app
-      - /app/node_module
+      - /app/node_modules
     environment:
       - NODE_OPTIONS=--no-deprecation
       - CHOKIDAR_USEPOLLING=true
-    command: ["yarn", "start"]
+    command: ["yarn", "dev"]

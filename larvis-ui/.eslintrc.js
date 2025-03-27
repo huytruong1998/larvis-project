@@ -2,8 +2,11 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: './tsconfig.json',
+    project: 'tsconfig.json',
+    tsconfigRootDir: __dirname,
+    sourceType: 'module',
   },
+
   extends: [
     'airbnb',
     'airbnb-typescript',
@@ -17,6 +20,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
     'linebreak-style': 0, // fixes CRLF/LF errors
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
   ignorePatterns: ['node_modules', 'build', 'dist'],
 };
