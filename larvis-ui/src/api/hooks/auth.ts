@@ -7,22 +7,32 @@ interface LoginPayload {
   password: string;
 }
 
+interface LoginResponse {
+  userId: string;
+  token: string;
+}
+
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-export const loginUser = async (payload: LoginPayload): Promise<string> => {
+export const loginUser = async (payload: LoginPayload): Promise<LoginResponse> => {
   const res = await larvisServiceClient.post('/token', payload);
-  return res.data.access;
+
+  return {
+    token: res.data.access,
+    userId: payload.user_id,
+  };
 };
 
 export const useLoginUser = () => {
-  const { login: storeToken } = useAuthContext();
+  const { login: storeToken, setUserId } = useAuthContext();
 
   return useMutation({
     mutationFn: (payload: LoginPayload) => loginUser(payload),
-    onSuccess: (token) => {
-      storeToken(token);
-      message.success('Successfully logged in');
+    onSuccess: (data) => {
+      storeToken(data.token);
+      setUserId(data.userId);
+      message.success('Successfully logged in!');
     },
     onError: (error: AxiosError) => {
       const status = error.response?.status;

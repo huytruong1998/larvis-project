@@ -5,14 +5,17 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 type AuthContextType = {
   accessToken: string | null;
   setAccessToken: (token: string | null) => void;
+  setUserId: (userId: string) => void;
   login: (token: string) => void;
   logout: () => void;
+  userId: string | null;
   isAuthenticated: boolean;
 };
 
 // avoid unwanted rerender?
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [userId, setuserId] = useState<string | null>(null);
 
   useEffect(() => {
     const token = sessionStorage.getItem('token');
@@ -29,14 +32,21 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     sessionStorage.removeItem('token');
     setAccessToken(null);
+    setuserId(null);
+  };
+
+  const setUserId = (userId: string) => {
+    setuserId(userId);
   };
 
   const value = useMemo(
     () => ({
       accessToken,
       setAccessToken,
+      setUserId,
       login,
       logout,
+      userId,
       isAuthenticated: !!accessToken,
     }),
     [accessToken],
