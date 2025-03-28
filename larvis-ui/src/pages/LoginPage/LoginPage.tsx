@@ -1,13 +1,19 @@
 import React from 'react';
 import { Form, Input, Button, Typography, Card } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { useLoginUser } from '@/api/hooks/auth';
 
 const { Title } = Typography;
 
+type FormInputs = {
+  username: string;
+  password: string;
+};
+
 export const LoginPage: React.FC = () => {
-  const onFinish = (values: any) => {
-    console.log('Login submitted:', values);
-    // 👉 handle authentication here
+  const { mutate: loginUser, isPending } = useLoginUser();
+  const onFinish = (inputs: FormInputs) => {
+    loginUser({ user_id: inputs.username, password: inputs.password });
   };
 
   return (
@@ -34,8 +40,8 @@ export const LoginPage: React.FC = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" block>
-              Login
+            <Button type="primary" htmlType="submit" block loading={isPending}>
+              {isPending ? 'Logging in...' : 'Login'}
             </Button>
           </Form.Item>
         </Form>
