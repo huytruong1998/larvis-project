@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button } from 'antd';
+import { NavBar } from '@/components/NavBar/NavBar';
 
 export const HomePage: React.FC = () => {
   return (
     <div>
-      <div>HomePage 123</div>
-      <Button>My first button</Button>
+      <NavBar />
+      <div>Homepage content</div>
     </div>
   );
 };

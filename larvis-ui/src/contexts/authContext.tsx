@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode, useEffect, useContext } from 'react';
+import React, { createContext, useState, ReactNode, useEffect, useContext, useMemo } from 'react';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -15,7 +15,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = sessionStorage.getItem('access_token');
+    const token = sessionStorage.getItem('token');
     if (token) {
       setAccessToken(token);
     }
@@ -31,13 +31,16 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     setAccessToken(null);
   };
 
-  const value: AuthContextType = {
-    accessToken,
-    setAccessToken,
-    login,
-    logout,
-    isAuthenticated: !!accessToken,
-  };
+  const value = useMemo(
+    () => ({
+      accessToken,
+      setAccessToken,
+      login,
+      logout,
+      isAuthenticated: !!accessToken,
+    }),
+    [accessToken],
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

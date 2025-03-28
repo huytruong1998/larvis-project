@@ -35,3 +35,8 @@ export const useLoginUser = () => {
     },
   });
 };
+
+export const logoutUser = async () => {
+  const { logout: removeToken } = useAuthContext();
+  removeToken();
+};
