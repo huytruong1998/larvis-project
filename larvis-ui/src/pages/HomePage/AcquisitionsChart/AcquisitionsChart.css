@@ -1,3 +1,15 @@
+.acquisitions-chart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: #fff;
+  height: 100%;
+  min-height: 400px;
+  min-width: 300px;
+  max-width: 1000px;
+  padding: 24px 6px;
+}
+
 .custom-tooltip {
   padding: 16px;
   background-color: white;

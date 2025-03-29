@@ -1,31 +1,17 @@
 import { useGetUsers } from '@/api/hooks/user';
-import { Card, Typography, List, Spin, Alert } from 'antd';
+import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
+import { Card, Typography, List, Spin, Alert, Modal } from 'antd';
+import { useState } from 'react';
+import './UserList.css';
 
 const { Title, Text } = Typography;
 
-type User = {
-  name: string;
-  user_id: string;
-};
-
 export const UserList = () => {
   const { data: userData, isPending, isError, error } = useGetUsers();
-
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   return (
-    <div
-      style={{
-        maxWidth: '1000px',
-        minWidth: '300px',
-        margin: '0 auto',
-        padding: '24px',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        background: '#fff',
-      }}
-    >
-      <Title level={2} style={{ textAlign: 'center', marginBottom: 32 }}>
+    <div className="user-list-container">
+      <Title level={2} className="user-list-title">
         User List
       </Title>
       {isPending && <Spin spinning={isPending} />}
@@ -47,7 +33,7 @@ export const UserList = () => {
           split={false}
           dataSource={userData}
           renderItem={(user) => (
-            <List.Item style={{ display: 'flex', justifyContent: 'center' }}>
+            <List.Item className="user-list-item" onClick={() => setSelectedUserId(user.user_id)}>
               <Card
                 hoverable
                 style={{
@@ -71,6 +57,16 @@ export const UserList = () => {
           )}
         />
       )}
+
+      <Modal
+        open={!!selectedUserId}
+        onCancel={() => setSelectedUserId(null)}
+        footer={null}
+        centered
+        className="custom-modal"
+      >
+        {selectedUserId && <ProfileCard userId={selectedUserId} />}
+      </Modal>
     </div>
   );
 };

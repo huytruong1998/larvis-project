@@ -1,3 +1,14 @@
+.profile-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-content {
+  display: block;
+  width: 100%;
+}
+
 .responsive-buttons {
   display: flex;
   justify-content: flex-end;
@@ -11,22 +22,7 @@
   }
 }
 
-.profile-button-wrapper {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-}
-
 .profile-avatar {
   text-align: center;
   margin-bottom: 24px;
-}
-/* Move button above avatar on mobile */
-@media (max-width: 767px) {
-  .profile-button-wrapper {
-    position: static;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
 }
