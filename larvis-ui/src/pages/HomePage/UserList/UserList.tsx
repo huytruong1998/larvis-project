@@ -22,6 +22,7 @@ export const UserList = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
+        background: '#fff',
       }}
     >
       <Title level={2} style={{ textAlign: 'center', marginBottom: 32 }}>

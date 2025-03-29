@@ -58,15 +58,16 @@ export const AcquisitionsChart = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end', // aligns content to the bottom
-        alignItems: 'center',
+        background: '#fff',
         height: '100%',
         minHeight: '400px',
+        minWidth: '300px',
+        maxWidth: '1000px',
+        padding: '24px 6px',
       }}
     >
       <div
         style={{
-          minWidth: '400px',
-          maxWidth: '1000px',
           width: '100%',
           height: 300,
         }}
