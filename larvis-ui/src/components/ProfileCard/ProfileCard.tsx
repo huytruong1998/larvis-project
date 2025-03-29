@@ -1,6 +1,6 @@
 import { Card, Avatar, Typography, Input, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { useAuthContext } from '@/contexts/authContext';
+import './ProfileCard.css';
 
 const { Text } = Typography;
 
@@ -9,27 +9,20 @@ export const ProfileCard = () => {
   return (
     <Card
       style={{
-        height: 400,
         minWidth: 200,
         margin: 'auto',
         boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
       }}
-      bordered={false}
+      variant="borderless"
     >
-      <Button
-        type="primary"
-        size="small"
-        style={{
-          position: 'absolute',
-          top: 16,
-          right: 16,
-          zIndex: 1,
-        }}
-      >
-        My Profile
-      </Button>
+      <div className="profile-button-wrapper">
+        <Button type="primary" size="small">
+          My Profile
+        </Button>
+      </div>
+
       {/* Profile Picture */}
-      <div style={{ textAlign: 'center', marginBottom: 24 }}>
+      <div className="profile-avatar">
         <Avatar size={80} icon={<UserOutlined />} />
       </div>
 
@@ -51,14 +44,7 @@ export const ProfileCard = () => {
         </div>
       </div>
 
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-end', // or 'center' if you prefer
-          gap: 12,
-          marginTop: 24,
-        }}
-      >
+      <div className="responsive-buttons">
         <Button type="default">Edit</Button>
         <Button type="primary">Update</Button>
       </div>
