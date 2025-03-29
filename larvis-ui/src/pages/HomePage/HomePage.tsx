@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Row } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 
-import { UserList } from '@/components/ListUsers/UserList';
 import { AcquisitionsChart } from './AcquisitionsChart/AcquisitionsChart';
+import { UserList } from './ListUsers/UserList';
 
 export const HomePage: React.FC = () => {
   return (

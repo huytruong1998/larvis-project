@@ -12,15 +12,8 @@ import {
 } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import './AcquisitionsChart.css';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { getAcquisitions } from '@/api/hooks/acquisitions';
-import { message, Spin } from 'antd';
-import { AxiosError } from 'axios';
-
-type RawDataPoint = {
-  timestamp: number; // UNIX seconds
-  ore_sites: number;
-};
+import { useGetAcquisitions } from '@/api/hooks/acquisitions';
+import { Alert, Spin } from 'antd';
 
 const CustomTooltip: React.FC<TooltipProps<ValueType, NameType>> = ({ active, payload, label }) => {
   if (!active || !payload || payload.length === 0) return null;
@@ -37,20 +30,8 @@ const CustomTooltip: React.FC<TooltipProps<ValueType, NameType>> = ({ active, pa
   );
 };
 
-type Acquisition = {
-  timestamp: number;
-  ore_sites: number;
-};
-
 export const AcquisitionsChart = () => {
-  const {
-    data: rawData,
-    isLoading,
-    isError,
-  } = useQuery<Acquisition[], Error>({
-    queryKey: ['acquisitions'],
-    queryFn: getAcquisitions,
-  });
+  const { data: rawData, isPending, isError, error } = useGetAcquisitions();
 
   const data = useMemo(() => {
     if (!rawData) return [];
@@ -71,12 +52,30 @@ export const AcquisitionsChart = () => {
     return Object.entries(grouped).map(([time, value]) => ({ time, value }));
   }, [rawData]);
 
-  if (isError || !rawData) return <div>Error loading data</div>;
-
   return (
-    <div style={{ minWidth: '300px', maxWidth: '1000px', width: '100%' }}>
-      <Spin spinning={isLoading}>
-        <ResponsiveContainer width="100%" height={300}>
+    <div
+      style={{
+        minWidth: '300px',
+        maxWidth: '1000px',
+        width: '100%',
+        height: 300,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      {isPending && <Spin spinning={isPending} />}
+
+      {isError && (
+        <Alert
+          message={'Error loading Acquisitions data: ' + (error?.message || 'Undefined')}
+          type="error"
+          showIcon
+        />
+      )}
+
+      {!isError && !isPending && (
+        <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
@@ -115,7 +114,7 @@ export const AcquisitionsChart = () => {
             />
           </LineChart>
         </ResponsiveContainer>
-      </Spin>
+      )}
     </div>
   );
 };
