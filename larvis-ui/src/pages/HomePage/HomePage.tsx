@@ -1,10 +1,9 @@
 import React from 'react';
-import { NavBar } from '@/components/NavBar/NavBar';
-import { Col, Layout, Row } from 'antd';
+import { Col, Row } from 'antd';
 import { Content } from 'antd/es/layout/layout';
-import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
-import { TimeSeriesChart } from '@/components/TimeSeriesChart/TimeSeriesChart';
+
 import { UserList } from '@/components/ListUsers/UserList';
+import { AcquisitionsChart } from './AcquisitionsChart/AcquisitionsChart';
 
 export const HomePage: React.FC = () => {
   return (
@@ -15,7 +14,7 @@ export const HomePage: React.FC = () => {
           <UserList />
         </Col>
         <Col xs={24} md={16}>
-          <TimeSeriesChart />
+          <AcquisitionsChart />
         </Col>
       </Row>
     </Content>

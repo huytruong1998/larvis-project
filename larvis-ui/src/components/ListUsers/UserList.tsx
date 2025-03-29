@@ -28,7 +28,17 @@ export const UserList = () => {
         dataSource={users}
         renderItem={(user) => (
           <List.Item style={{ display: 'flex', justifyContent: 'center' }}>
-            <Card style={{ width: '100%', maxWidth: 400 }} bodyStyle={{ padding: '12px 16px' }}>
+            <Card
+              style={{
+                width: '100%',
+                maxWidth: 400,
+              }}
+              styles={{
+                body: {
+                  padding: '12px 16px',
+                },
+              }}
+            >
               <Title level={4} style={{ margin: 0, marginBottom: 4 }}>
                 {user.name}
               </Title>
