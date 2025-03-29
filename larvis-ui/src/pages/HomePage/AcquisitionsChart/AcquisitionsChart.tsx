@@ -55,66 +55,74 @@ export const AcquisitionsChart = () => {
   return (
     <div
       style={{
-        minWidth: '300px',
-        maxWidth: '1000px',
-        width: '100%',
-        height: 300,
         display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end', // aligns content to the bottom
         alignItems: 'center',
-        justifyContent: 'center',
+        height: '100%',
+        minHeight: '400px',
       }}
     >
-      {isPending && <Spin spinning={isPending} />}
+      <div
+        style={{
+          minWidth: '400px',
+          maxWidth: '1000px',
+          width: '100%',
+          height: 300,
+        }}
+      >
+        {isPending && <Spin spinning={isPending} />}
 
-      {isError && (
-        <Alert
-          message={'Error loading Acquisitions data: ' + (error?.message || 'Undefined')}
-          type="error"
-          showIcon
-        />
-      )}
+        {isError && (
+          <Alert
+            message={'Error loading Acquisitions data: ' + (error?.message || 'Undefined')}
+            type="error"
+            showIcon
+          />
+        )}
 
-      {!isError && !isPending && (
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="time"
-              label={{
-                value: 'Date',
-                position: 'insideBottom',
-                offset: -5,
-                style: { fill: '#999' },
-              }}
-            />
-            <YAxis
-              label={{
-                value: 'Ore Sites',
-                angle: -90,
-                position: 'insideLeft',
-                style: { fill: '#999' },
-              }}
-            />
-            <Tooltip content={<CustomTooltip />} />
-            <Legend
-              verticalAlign="middle"
-              align="right"
-              layout="vertical"
-              iconType="square"
-              wrapperStyle={{
-                paddingLeft: 20,
-              }}
-            />
-            <Line
-              type="monotone"
-              dataKey="value"
-              stroke="#1890ff"
-              strokeWidth={2}
-              name="Ore deposits"
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      )}
+        {!isError && !isPending && (
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="time"
+                label={{
+                  value: 'Date',
+                  position: 'insideBottom',
+                  offset: -5,
+                  style: { fill: '#999' },
+                }}
+              />
+              <YAxis
+                label={{
+                  value: 'Ore Sites',
+                  angle: -90,
+                  position: 'insideLeft',
+                  style: { fill: '#999' },
+                }}
+              />
+              <Tooltip content={<CustomTooltip />} />
+              <Legend
+                verticalAlign="middle"
+                align="right"
+                layout="vertical"
+                iconType="square"
+                wrapperStyle={{
+                  paddingLeft: 20,
+                }}
+              />
+              <Line
+                type="monotone"
+                dataKey="value"
+                stroke="#1890ff"
+                strokeWidth={2}
+                name="Ore deposits"
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        )}
+      </div>
     </div>
   );
 };

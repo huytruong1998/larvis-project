@@ -1,5 +1,6 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import larvisServiceClient from '../larvisServiceClient';
+import { AxiosError } from 'axios';
 
 type Acquisition = {
   timestamp: number;
@@ -12,7 +13,7 @@ export const getAcquisitions = async () => {
 };
 
 export const useGetAcquisitions = () => {
-  return useQuery<Acquisition[], Error>({
+  return useQuery<Acquisition[], AxiosError>({
     queryKey: ['acquisitions'],
     queryFn: getAcquisitions,
     staleTime: 1000 * 60 * 5,
