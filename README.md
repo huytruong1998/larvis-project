@@ -13,7 +13,7 @@ The project is run in docker to keep the envirnment consistent across multiple m
 
 ### Run production build in Docker
 
-Create a optimized build with Vite to `larvis-ui/dist` and run it in Docker with file `docker-compose.prod.yml`. Create the build by running the command below
+Create a optimized build with Vite to `larvis-ui/dist` and run it in Docker with file `docker-compose.prod.yml`. Create the build by running the command below in root folder `larvis-project`
 
 ```
 docker compose -f docker-compose.prod.yml up --build
@@ -29,6 +29,18 @@ You can stop all running container with command
 
 ```
 docker compose down
+```
+
+If you encounter this error on Mac
+
+```
+Error response from daemon: OCI runtime create failed: container_linux.go:367: starting container process caused: exec: "/larvis": permission denied: unknown
+```
+
+Run
+
+```
+cd larvis-service && chmod +x larvis
 ```
 
 ### Local development environemnt in Docker
