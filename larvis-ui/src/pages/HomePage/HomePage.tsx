@@ -1,12 +1,11 @@
-import React from 'react';
 import { Col, Row } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 
-import { AcquisitionsChart } from './AcquisitionsChart/AcquisitionsChart';
-import { UserList } from './UserList/UserList';
+import AcquisitionsChart from './AcquisitionsChart/AcquisitionsChart';
+import UserList from './UserList/UserList';
 import styles from './HomePage.module.css';
 
-export const HomePage: React.FC = () => {
+function HomePage() {
   return (
     <Content className={styles.homeContainer}>
       <Row
@@ -28,4 +27,6 @@ export const HomePage: React.FC = () => {
       </Row>
     </Content>
   );
-};
+}
+
+export default HomePage;

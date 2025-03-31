@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode, useEffect, useContext, useMemo } from 'react';
+import { createContext, useState, ReactNode, useEffect, useContext, useMemo } from 'react';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -13,7 +13,7 @@ type AuthContextType = {
 };
 
 // avoid unwanted rerender?
-export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
+export function AuthContextProvider({ children }: { children: ReactNode }) {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [currentUserId, setCurrentuserId] = useState<string | null>(null);
 
@@ -56,14 +56,14 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       currentUserId,
       isAuthenticated: !!accessToken,
     }),
-    [accessToken],
+    [accessToken, currentUserId],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
+}
 
-export const useAuthContext = () => {
+export function useAuthContext() {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error('useAuth must be used within an AuthProvider');
   return ctx;
-};
+}

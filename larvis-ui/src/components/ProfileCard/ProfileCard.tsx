@@ -1,13 +1,13 @@
-import { Avatar, Typography, Input, Button, Spin, Alert, Form } from 'antd';
+import { Avatar, Input, Button, Spin, Alert, Form } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
-import styles from './ProfileCard.module.css';
-import { useGetUserById, useUpdateUser } from '@/api/hooks/user';
-import { useAuthContext } from '@/contexts/authContext';
 import { useEffect, useState } from 'react';
-import { User } from '@/type/user';
+import { useGetUserById, useUpdateUser } from 'src/api/hooks/user';
+import { useAuthContext } from 'src/contexts/authContext';
+import { User } from 'src/type/user';
+import styles from './ProfileCard.module.css';
 
-export const ProfileCard = ({ userId }: { userId: string }) => {
+export default function ProfileCard({ userId }: { userId: string }) {
   const { data: userData, isPending, isError, error } = useGetUserById(userId);
   const { mutate: updateUser, isPending: isUpdatingUser } = useUpdateUser();
   const [isEditing, setIsEditing] = useState(false);
@@ -32,7 +32,7 @@ export const ProfileCard = ({ userId }: { userId: string }) => {
         password: userData.password || '',
       });
     }
-  }, [userData]);
+  }, [userData, userForm]);
 
   const isCurrentUser = currentUserId === userData?.user_id;
   return (
@@ -41,7 +41,7 @@ export const ProfileCard = ({ userId }: { userId: string }) => {
 
       {isError && (
         <Alert
-          message={'Error loading Profile data: ' + (error?.message || 'Undefined')}
+          message={`Error loading Profile data: ${error?.message || 'Undefined'}`}
           type="error"
           showIcon
         />
@@ -104,4 +104,4 @@ export const ProfileCard = ({ userId }: { userId: string }) => {
       )}
     </div>
   );
-};
+}

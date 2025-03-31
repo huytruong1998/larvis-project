@@ -1,13 +1,13 @@
-import { useGetUsers } from '@/api/hooks/user';
-import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
 import { Card, Typography, List, Spin, Alert, Modal } from 'antd';
 import { useState } from 'react';
+import { useGetUsers } from 'src/api/hooks/user';
+import ProfileCard from 'src/components/ProfileCard/ProfileCard';
 import styles from './UserList.module.css';
-import '@/global.css';
+import 'src/global.css';
 
 const { Title, Text } = Typography;
 
-export const UserList = () => {
+export default function UserList() {
   const { data: userData, isPending, isError, error } = useGetUsers();
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   return (
@@ -19,7 +19,7 @@ export const UserList = () => {
 
       {isError && (
         <Alert
-          message={'Error loading Users data: ' + (error?.message || 'Undefined')}
+          message={`Error loading Users data: ${error?.message || 'Undefined'}`}
           type="error"
           showIcon
         />
@@ -74,4 +74,4 @@ export const UserList = () => {
       </Modal>
     </div>
   );
-};
+}

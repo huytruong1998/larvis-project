@@ -1,11 +1,10 @@
-import React from 'react';
-import { Routes, Route, Router, BrowserRouter, Navigate } from 'react-router-dom';
-import { HomePage } from '@/pages/HomePage/HomePage';
-import { LoginPage } from '@/pages/LoginPage/LoginPage';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import HomePage from 'src/pages/HomePage/HomePage';
+import LoginPage from 'src/pages/LoginPage/LoginPage';
 import ProtectedRoute from './ProtectedRoute';
-import { MainLayout } from './MainLayout';
+import MainLayout from './MainLayout';
 
-const AppRoutes = () => {
+function AppRoutes() {
   return (
     <Routes>
       <Route element={<ProtectedRoute />}>
@@ -21,6 +20,6 @@ const AppRoutes = () => {
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
-};
+}
 
 export default AppRoutes;

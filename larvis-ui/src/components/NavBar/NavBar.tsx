@@ -1,14 +1,14 @@
-import { useAuthContext } from '@/contexts/authContext';
 import { Button, Modal } from 'antd';
 import { Header } from 'antd/es/layout/layout';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import Title from 'antd/es/typography/Title';
 
-import styles from './NavBar.module.css';
 import { useState } from 'react';
-import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
+import { useAuthContext } from 'src/contexts/authContext';
+import ProfileCard from 'src/components/ProfileCard/ProfileCard';
+import styles from './NavBar.module.css';
 
-export const NavBar = () => {
+export default function NavBar() {
   const { logout, currentUserId } = useAuthContext();
   const [openMyProfile, setOpenMyProfile] = useState<boolean>(false);
   return (
@@ -44,4 +44,4 @@ export const NavBar = () => {
       </Modal>
     </>
   );
-};
+}

@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import larvisServiceClient from '../larvisServiceClient';
 import { AxiosError } from 'axios';
-import { User } from '@/type/user';
 import { message } from 'antd';
+import { User } from 'src/type/user';
+import larvisServiceClient from '../larvisServiceClient';
 
 const getUserById = async (userId: string) => {
   const res = await larvisServiceClient.get(`/users/${userId}`);
@@ -56,7 +56,7 @@ export const useUpdateUser = () => {
       if (status === 401) {
         message.error(error.response?.statusText || 'Unauthorized');
       } else {
-        message.error('Failed to update user:' + error.message);
+        message.error(`Failed to update user:${error.message}`);
       }
     },
   });

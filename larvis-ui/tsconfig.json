@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
     "lib": ["dom", "dom.iterable", "ESNext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -17,9 +17,9 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "src/*": ["./src/*"]
     }
   },
   "include": ["src", "vite.config.mts", "vite-env.d.ts"],
-  "exclude": [".eslintrc.js", "node_modules", "dist"]
+  "exclude": [".eslintrc.cjs", "node_modules", "dist"]
 }

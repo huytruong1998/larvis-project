@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAuthContext } from '@/contexts/authContext';
+import { useAuthContext } from 'src/contexts/authContext';
 
-const ProtectedRoute = () => {
+function ProtectedRoute() {
   const { isAuthenticated } = useAuthContext();
   const location = useLocation();
 
@@ -10,6 +10,6 @@ const ProtectedRoute = () => {
   }
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
-};
+}
 
 export default ProtectedRoute;

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Form, Input, Button, Typography, Card } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { useLoginUser } from '@/api/hooks/auth';
+import useLoginUser from 'src/api/hooks/auth';
 import styles from './LoginPage.module.css';
 
 const { Title } = Typography;
@@ -11,7 +11,7 @@ type FormInputs = {
   password: string;
 };
 
-export const LoginPage: React.FC = () => {
+function LoginPage() {
   const { mutate: loginUser, isPending, isError, error } = useLoginUser();
 
   const [loginForm] = Form.useForm();
@@ -33,7 +33,7 @@ export const LoginPage: React.FC = () => {
         },
       ]);
     }
-  }, [isError]);
+  }, [error, isError, loginForm]);
 
   return (
     <div className={styles.loginPageContainer}>
@@ -73,19 +73,6 @@ export const LoginPage: React.FC = () => {
       </Card>
     </div>
   );
-};
+}
 
-// const styles = {
-//   page: {
-//     height: '100vh',
-//     display: 'flex',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     background: '#f5f5f5',
-//   } as React.CSSProperties,
-//   card: {
-//     width: 350,
-//     padding: 24,
-//     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-//   } as React.CSSProperties,
-// };
+export default LoginPage;

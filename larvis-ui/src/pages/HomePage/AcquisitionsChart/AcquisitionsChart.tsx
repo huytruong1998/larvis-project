@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import {
   CartesianGrid,
   Legend,
@@ -6,20 +6,19 @@ import {
   LineChart,
   ResponsiveContainer,
   Tooltip,
-  TooltipProps,
   XAxis,
   YAxis,
 } from 'recharts';
-import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
-import styles from './AcquisitionsChart.module.css';
-import { useGetAcquisitions } from '@/api/hooks/acquisitions';
+
 import { Alert, Spin, Typography } from 'antd';
-import { useIsMobile } from '@/utils/hooks';
-import { CustomTooltip } from '@/components/CustomTooltip/CustomTooltip';
+import useGetAcquisitions from 'src/api/hooks/acquisitions';
+import useIsMobile from 'src/utils/hooks';
+import CustomTooltip from 'src/components/CustomTooltip/CustomTooltip';
+import styles from './AcquisitionsChart.module.css';
 
 const { Title } = Typography;
 
-export const AcquisitionsChart = () => {
+export default function AcquisitionsChart() {
   const { data: rawData, isPending, isError, error } = useGetAcquisitions();
   const isMobile = useIsMobile();
 
@@ -51,7 +50,7 @@ export const AcquisitionsChart = () => {
 
       {isError && (
         <Alert
-          message={'Error loading Acquisitions data: ' + (error?.message || 'Undefined')}
+          message={`Error loading Acquisitions data: ${error?.message || 'Undefined'}`}
           type="error"
           showIcon
         />
@@ -102,4 +101,4 @@ export const AcquisitionsChart = () => {
       )}
     </div>
   );
-};
+}
