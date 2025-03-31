@@ -1,6 +1,7 @@
 import { Avatar, Typography, Input, Button, Spin, Alert } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import './ProfileCard.css';
+
+import styles from './ProfileCard.module.css';
 import { useGetUserById, useUpdateUser } from '@/api/hooks/user';
 import { useAuthContext } from '@/contexts/authContext';
 import { useEffect, useState } from 'react';
@@ -39,7 +40,7 @@ export const ProfileCard = ({ userId }: { userId: string }) => {
 
   const isCurrentUser = currentUserId === userData?.user_id;
   return (
-    <div className="profile-container">
+    <div className={styles.profileContainer}>
       {isPending && <Spin spinning={isPending} />}
 
       {isError && (
@@ -51,14 +52,14 @@ export const ProfileCard = ({ userId }: { userId: string }) => {
       )}
 
       {!isPending && !isError && (
-        <div className="profile-content">
+        <div className={styles.profileContent}>
           {/* Avatar */}
-          <div className="profile-avatar">
+          <div className={styles.profileAvatar}>
             <Avatar size={80} icon={<UserOutlined />} />
           </div>
 
           {/* User Data display */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div className={styles.inputContainer}>
             <div>
               <Text strong>User ID</Text>
               <Input value={formData.user_id} disabled />
@@ -86,7 +87,7 @@ export const ProfileCard = ({ userId }: { userId: string }) => {
           </div>
 
           {isCurrentUser && (
-            <div className="responsive-buttons">
+            <div className={styles.responsiveButtons}>
               <Button type="primary" disabled={isEditing} onClick={() => setIsEditing(true)}>
                 Edit
               </Button>

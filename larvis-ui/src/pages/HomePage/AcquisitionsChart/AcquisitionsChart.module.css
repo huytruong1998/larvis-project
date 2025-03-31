@@ -1,4 +1,4 @@
-.acquisitions-chart-container {
+.acquisitionsChartContainer {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -10,7 +10,7 @@
   padding: 24px 6px;
 }
 
-.custom-tooltip {
+.customTooltip {
   padding: 16px;
   background-color: white;
   border: 1px solid #d1d5db;
@@ -21,19 +21,19 @@
   gap: 12px;
 }
 
-.tooltip-date {
+.tooltipDate {
   font-size: 0.875rem;
   font-weight: 500;
   color: #1f2937;
   margin-bottom: 8px;
 }
 
-.tooltip-line {
+.tooltipLine {
   font-size: 0.875rem;
   color: #374151;
   margin: 0;
 }
 
-.tooltip-amount {
+.tooltipAmount {
   margin-left: 8px;
 }

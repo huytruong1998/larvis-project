@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Form, Input, Button, Typography, Card } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useLoginUser } from '@/api/hooks/auth';
+import styles from './LoginPage.module.css';
 
 const { Title } = Typography;
 
@@ -35,8 +36,8 @@ export const LoginPage: React.FC = () => {
   }, [isError]);
 
   return (
-    <div style={styles.page}>
-      <Card style={styles.card}>
+    <div className={styles.loginPageContainer}>
+      <Card className={styles.loginPageCard}>
         <Title level={2} style={{ textAlign: 'center' }}>
           Login
         </Title>
@@ -74,17 +75,17 @@ export const LoginPage: React.FC = () => {
   );
 };
 
-const styles = {
-  page: {
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    background: '#f5f5f5',
-  } as React.CSSProperties,
-  card: {
-    width: 350,
-    padding: 24,
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-  } as React.CSSProperties,
-};
+// const styles = {
+//   page: {
+//     height: '100vh',
+//     display: 'flex',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     background: '#f5f5f5',
+//   } as React.CSSProperties,
+//   card: {
+//     width: 350,
+//     padding: 24,
+//     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+//   } as React.CSSProperties,
+// };

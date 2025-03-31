@@ -11,7 +11,7 @@ import {
   YAxis,
 } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
-import './AcquisitionsChart.css';
+import styles from './AcquisitionsChart.module.css';
 import { useGetAcquisitions } from '@/api/hooks/acquisitions';
 import { Alert, Spin } from 'antd';
 
@@ -19,11 +19,11 @@ const CustomTooltip: React.FC<TooltipProps<ValueType, NameType>> = ({ active, pa
   if (!active || !payload || payload.length === 0) return null;
 
   return (
-    <div className="custom-tooltip">
-      <p className="tooltip-date">Date: {label}</p>
+    <div className={styles.customTooltip}>
+      <p className={styles.tooltipDate}>Date: {label}</p>
       {payload.map((entry, index) => (
-        <p key={index} className="tooltip-line">
-          <span className="tooltip-amount">Amount: {entry.value}</span>
+        <p key={index} className={styles.tooltipLine}>
+          <span className={styles.tooltipAmount}>Amount: {entry.value}</span>
         </p>
       ))}
     </div>
@@ -53,7 +53,7 @@ export const AcquisitionsChart = () => {
   }, [rawData]);
 
   return (
-    <div className="acquisitions-chart-container">
+    <div className={styles.acquisitionsChartContainer}>
       {isPending && <Spin spinning={isPending} />}
 
       {isError && (

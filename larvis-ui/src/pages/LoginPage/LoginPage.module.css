@@ -1,0 +1,13 @@
+.loginPageContainer {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(200, 200, 200, 0.03);
+}
+
+.loginPageCard {
+  width: 350px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}

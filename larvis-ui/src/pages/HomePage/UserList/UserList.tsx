@@ -2,7 +2,7 @@ import { useGetUsers } from '@/api/hooks/user';
 import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
 import { Card, Typography, List, Spin, Alert, Modal } from 'antd';
 import { useState } from 'react';
-import './UserList.css';
+import styles from './UserList.module.css';
 
 const { Title, Text } = Typography;
 
@@ -10,8 +10,8 @@ export const UserList = () => {
   const { data: userData, isPending, isError, error } = useGetUsers();
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   return (
-    <div className="user-list-container">
-      <Title level={2} className="user-list-title">
+    <div className={styles.userListContainer}>
+      <Title level={2} className={styles.userListTitle}>
         User List
       </Title>
       {isPending && <Spin spinning={isPending} />}
@@ -33,7 +33,10 @@ export const UserList = () => {
           split={false}
           dataSource={userData}
           renderItem={(user) => (
-            <List.Item className="user-list-item" onClick={() => setSelectedUserId(user.user_id)}>
+            <List.Item
+              className={styles.userListItem}
+              onClick={() => setSelectedUserId(user.user_id)}
+            >
               <Card
                 hoverable
                 style={{
@@ -64,7 +67,6 @@ export const UserList = () => {
         destroyOnClose
         footer={null}
         centered
-        className="custom-modal"
       >
         {selectedUserId && <ProfileCard userId={selectedUserId} />}
       </Modal>
