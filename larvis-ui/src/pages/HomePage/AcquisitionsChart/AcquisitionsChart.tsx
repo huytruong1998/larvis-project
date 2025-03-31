@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   CartesianGrid,
   Legend,
@@ -13,25 +13,15 @@ import {
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import styles from './AcquisitionsChart.module.css';
 import { useGetAcquisitions } from '@/api/hooks/acquisitions';
-import { Alert, Spin } from 'antd';
+import { Alert, Spin, Typography } from 'antd';
+import { useIsMobile } from '@/utils/hooks';
+import { CustomTooltip } from '@/components/CustomTooltip/CustomTooltip';
 
-const CustomTooltip: React.FC<TooltipProps<ValueType, NameType>> = ({ active, payload, label }) => {
-  if (!active || !payload || payload.length === 0) return null;
-
-  return (
-    <div className={styles.customTooltip}>
-      <p className={styles.tooltipDate}>Date: {label}</p>
-      {payload.map((entry, index) => (
-        <p key={index} className={styles.tooltipLine}>
-          <span className={styles.tooltipAmount}>Amount: {entry.value}</span>
-        </p>
-      ))}
-    </div>
-  );
-};
+const { Title } = Typography;
 
 export const AcquisitionsChart = () => {
   const { data: rawData, isPending, isError, error } = useGetAcquisitions();
+  const isMobile = useIsMobile();
 
   const data = useMemo(() => {
     if (!rawData) return [];
@@ -54,6 +44,9 @@ export const AcquisitionsChart = () => {
 
   return (
     <div className={styles.acquisitionsChartContainer}>
+      <Title level={2} className={styles.chartTitle}>
+        Satellite Monthly Ore Acquisitions
+      </Title>
       {isPending && <Spin spinning={isPending} />}
 
       {isError && (
@@ -79,7 +72,7 @@ export const AcquisitionsChart = () => {
             />
             <YAxis
               label={{
-                value: 'Ore Sites',
+                value: 'Ore Amount',
                 angle: -90,
                 position: 'insideLeft',
                 style: { fill: '#999' },
@@ -87,11 +80,12 @@ export const AcquisitionsChart = () => {
             />
             <Tooltip content={<CustomTooltip />} />
             <Legend
-              verticalAlign="middle"
-              align="right"
-              layout="vertical"
+              verticalAlign={isMobile ? 'bottom' : 'middle'}
+              align={isMobile ? 'center' : 'right'}
+              layout={isMobile ? 'horizontal' : 'vertical'}
               iconType="square"
               wrapperStyle={{
+                paddingTop: isMobile ? 14 : 0,
                 paddingLeft: 20,
               }}
             />

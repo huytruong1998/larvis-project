@@ -14,12 +14,14 @@ export const ProfileCard = ({ userId }: { userId: string }) => {
   const { currentUserId } = useAuthContext();
 
   const [userForm] = Form.useForm();
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleUpdate = (formData: User) => {
     if (JSON.stringify(formData) !== JSON.stringify(userData)) {
       updateUser(formData);
     }
     setIsEditing(false);
+    setPasswordVisible(false);
   };
 
   useEffect(() => {
@@ -72,7 +74,13 @@ export const ProfileCard = ({ userId }: { userId: string }) => {
                 name="password"
                 rules={[{ required: true, message: 'Please input your password!' }]}
               >
-                <Input.Password disabled={!isEditing} />
+                <Input.Password
+                  disabled={!isEditing}
+                  visibilityToggle={{
+                    visible: passwordVisible,
+                    onVisibleChange: setPasswordVisible,
+                  }}
+                />
               </Form.Item>
             )}
 

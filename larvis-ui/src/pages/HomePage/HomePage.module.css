@@ -1,0 +1,11 @@
+.homeContainer {
+  padding: 24px;
+  min-height: 100vh;
+  background: rgba(200, 200, 200, 0.03);
+}
+
+@media (max-width: 425px) {
+  .homeContainer {
+    padding: 10px;
+  }
+}
