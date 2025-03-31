@@ -9,7 +9,31 @@ This project contains all the code for LARVIS home assignment
 
 ## Setup project environment with docker
 
-The project is run in docker to keep the envirnment consistent across multiple machine.In order to run the project, you need to have docker installed in your local machine .To create and starts all the container, build all the image, create volume to store package installed in node_module by running the command below in root folder containing the file `docker-compose.yml`
+The project is run in docker to keep the envirnment consistent across multiple machine.In order to run the project, you need to have docker installed in your local machine
+
+### Run production build in Docker
+
+Create a optimized build with Vite to `larvis-ui/dist` and run it in Docker with file `docker-compose.prod.yml`. Create the build by running the command below
+
+```
+docker compose -f docker-compose.prod.yml up --build
+```
+
+After the initial build, you can start the project in the background next time with command
+
+```
+docker compose -f docker-compose.prod.yml up -d
+```
+
+You can stop all running container with command
+
+```
+docker compose down
+```
+
+### Local development environemnt in Docker
+
+For local development, i make file `docker-compose.yml` which will run the project with hot reload so developer can edit and save code and it will update automatically. Run the command below for local development
 
 ```
 docker compose up --build
@@ -27,13 +51,13 @@ You can stop all running container with command
 docker compose down
 ```
 
-## How to use the frontend service
+## How to use the Larvis UI
 
 When all container is running, go to [http://localhost:3000/login](http://localhost:3000/login) to login into Larvis service using 3 default users `alice`, `bob`, and `charlie`, with the default password, `1234`, other wise you can't use the service
 
 ### Larvis UI
 
-The service should have layout like this:
+The Larvis homepage should look like this:
 ![Larvis UI](assets/larvis-homepage.png)
 
 There are 3 main component
@@ -43,3 +67,7 @@ There are 3 main component
 - There is a `User List` that display all the user in the service. We can see the user information by clicking on the user, if the user is the same as logged in user then we can edit the user information.
 
 - There is a `Satellite Monthly Ore Acquisitions` that display the amount of ore deposited to the satellite everyday from last month
+
+## Report for Larvis improvement
+
+- The Time series data for `/acquisitions` is not sorted from backend. If this is production, Sorting at the database level (e.g., SQL ORDER BY timestamp DESC) is much faster than the client and the backend service also has more resources, also we can optimize it by caching the result rather then rely on JS to sort it in client side.

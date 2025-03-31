@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  larvis-service:
+    build:
+      context: ./larvis-service
+    ports:
+      - "8080:8080"
+    container_name: larvis-service
+
+  larvis-ui:
+    build:
+      context: ./larvis-ui
+      dockerfile: Dockerfile.prod  # Explicitly use your prod Dockerfile
+    ports:
+      - "3000:80"  # Host:Container (assumes Nginx or Serve runs on port 80)
+    container_name: larvis-ui
+    depends_on:
+      - larvis-service
