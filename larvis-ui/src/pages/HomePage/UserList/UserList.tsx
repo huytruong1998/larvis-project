@@ -3,6 +3,7 @@ import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
 import { Card, Typography, List, Spin, Alert, Modal } from 'antd';
 import { useState } from 'react';
 import styles from './UserList.module.css';
+import '@/global.css';
 
 const { Title, Text } = Typography;
 
@@ -67,6 +68,7 @@ export const UserList = () => {
         destroyOnClose
         footer={null}
         centered
+        className="custom-ant-modal"
       >
         {selectedUserId && <ProfileCard userId={selectedUserId} />}
       </Modal>

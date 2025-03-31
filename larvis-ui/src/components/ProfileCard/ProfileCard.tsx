@@ -1,4 +1,4 @@
-import { Avatar, Typography, Input, Button, Spin, Alert } from 'antd';
+import { Avatar, Typography, Input, Button, Spin, Alert, Form } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 import styles from './ProfileCard.module.css';
@@ -7,21 +7,15 @@ import { useAuthContext } from '@/contexts/authContext';
 import { useEffect, useState } from 'react';
 import { User } from '@/type/user';
 
-const { Text } = Typography;
-
 export const ProfileCard = ({ userId }: { userId: string }) => {
   const { data: userData, isPending, isError, error } = useGetUserById(userId);
   const { mutate: updateUser, isPending: isUpdatingUser } = useUpdateUser();
   const [isEditing, setIsEditing] = useState(false);
   const { currentUserId } = useAuthContext();
 
-  const [formData, setFormData] = useState<User>({
-    user_id: userId,
-    name: '' as string,
-    password: '' as string,
-  });
+  const [userForm] = Form.useForm();
 
-  const handleUpdate = () => {
+  const handleUpdate = (formData: User) => {
     if (JSON.stringify(formData) !== JSON.stringify(userData)) {
       updateUser(formData);
     }
@@ -30,8 +24,8 @@ export const ProfileCard = ({ userId }: { userId: string }) => {
 
   useEffect(() => {
     if (userData) {
-      setFormData({
-        ...formData,
+      userForm.setFieldsValue({
+        user_id: userData.user_id,
         name: userData.name || '',
         password: userData.password || '',
       });
@@ -59,48 +53,45 @@ export const ProfileCard = ({ userId }: { userId: string }) => {
           </div>
 
           {/* User Data display */}
-          <div className={styles.inputContainer}>
-            <div>
-              <Text strong>User ID</Text>
-              <Input value={formData.user_id} disabled />
-            </div>
+          <Form form={userForm} layout="vertical" onFinish={handleUpdate}>
+            <Form.Item label="User ID" name="user_id">
+              <Input disabled />
+            </Form.Item>
 
-            <div>
-              <Text strong>Name</Text>
-              <Input
-                value={formData.name}
-                disabled={!isEditing}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              />
-            </div>
+            <Form.Item
+              label="Name"
+              name="name"
+              rules={[{ required: true, message: 'Please input your name!' }]}
+            >
+              <Input disabled={!isEditing} />
+            </Form.Item>
 
             {isCurrentUser && (
-              <div>
-                <Text strong>Password</Text>
-                <Input.Password
-                  value={formData.password}
-                  disabled={!isEditing}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                />
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[{ required: true, message: 'Please input your password!' }]}
+              >
+                <Input.Password disabled={!isEditing} />
+              </Form.Item>
+            )}
+
+            {isCurrentUser && (
+              <div className={styles.responsiveButtons}>
+                <Button type="primary" disabled={isEditing} onClick={() => setIsEditing(true)}>
+                  Edit
+                </Button>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  loading={isUpdatingUser}
+                  disabled={!isEditing || isUpdatingUser}
+                >
+                  Update
+                </Button>
               </div>
             )}
-          </div>
-
-          {isCurrentUser && (
-            <div className={styles.responsiveButtons}>
-              <Button type="primary" disabled={isEditing} onClick={() => setIsEditing(true)}>
-                Edit
-              </Button>
-              <Button
-                type="primary"
-                disabled={!isEditing || isUpdatingUser}
-                onClick={handleUpdate}
-                loading={isUpdatingUser}
-              >
-                Update
-              </Button>
-            </div>
-          )}
+          </Form>
         </div>
       )}
     </div>

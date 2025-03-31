@@ -4,4 +4,5 @@
   align-items: center;
   background: #fff;
   padding: 0 24px;
+  min-width: 300px;
 }
