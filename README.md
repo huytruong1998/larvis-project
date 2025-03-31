@@ -63,6 +63,8 @@ You can stop all running container with command
 docker compose down
 ```
 
+**Extra**: if you prefer not running docker for frontend, you need Node version 18 to run `yarn install` in `larvis-ui`
+
 ## How to use the Larvis UI
 
 When all container is running, go to [http://localhost:3000/login](http://localhost:3000/login) to login into Larvis service using 3 default users `alice`, `bob`, and `charlie`, with the default password, `1234`, other wise you can't use the service and well be redirect to `http://localhost:3000/login`
