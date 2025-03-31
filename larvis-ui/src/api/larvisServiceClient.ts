@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
-
+const apiUrl = import.meta.env.VITE_LARVIS_SERVICE_API;
 const larvisServiceClient: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: apiUrl || 'http://localhost:8080',
 });
 
 larvisServiceClient.interceptors.request.use(
