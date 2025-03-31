@@ -14,7 +14,9 @@ export const NavBar = () => {
   return (
     <>
       <Header className={styles.navbarHeader}>
-        <Title level={2}>Larvis</Title>
+        <Title level={2} style={{ color: 'rgb(24, 144, 255)' }}>
+          Larvis
+        </Title>
 
         <div className={styles.navbarActions}>
           <Button

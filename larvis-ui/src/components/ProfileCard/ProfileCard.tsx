@@ -63,7 +63,7 @@ export const ProfileCard = ({ userId }: { userId: string }) => {
             <Form.Item
               label="Name"
               name="name"
-              rules={[{ required: true, message: 'Please input your name!' }]}
+              rules={[{ required: isCurrentUser, message: 'Please input your name!' }]}
             >
               <Input disabled={!isEditing} />
             </Form.Item>
@@ -72,7 +72,7 @@ export const ProfileCard = ({ userId }: { userId: string }) => {
               <Form.Item
                 label="Password"
                 name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
+                rules={[{ required: isCurrentUser, message: 'Please input your password!' }]}
               >
                 <Input.Password
                   disabled={!isEditing}
