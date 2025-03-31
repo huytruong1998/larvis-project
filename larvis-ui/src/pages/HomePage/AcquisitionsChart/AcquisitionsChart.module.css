@@ -1,41 +1,14 @@
 .acquisitionsChartContainer {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  align-items: center;
   background: #fff;
   height: 100%;
   min-height: 400px;
   min-width: 280px;
   max-width: 1000px;
   padding: 24px 6px;
-}
-
-.customTooltip {
-  padding: 16px;
-  background-color: white;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.tooltipDate {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #1f2937;
-  margin-bottom: 8px;
-}
-
-.tooltipLine {
-  font-size: 0.875rem;
-  color: #374151;
-  margin: 0;
-}
-
-.tooltipAmount {
-  margin-left: 8px;
 }
 
 .chartTitle {
