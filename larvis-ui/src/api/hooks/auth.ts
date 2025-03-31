@@ -2,6 +2,9 @@ import larvisServiceClient from '@/api/larvisServiceClient';
 import { useAuthContext } from '@/contexts/authContext';
 import { message } from 'antd';
 
+import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+
 type LoginPayload = {
   user_id: string;
   password: string;
@@ -12,10 +15,7 @@ type LoginResponse = {
   token: string;
 };
 
-import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-
-export const loginUser = async (payload: LoginPayload): Promise<LoginResponse> => {
+const loginUser = async (payload: LoginPayload): Promise<LoginResponse> => {
   const res = await larvisServiceClient.post('/token', payload);
 
   return {

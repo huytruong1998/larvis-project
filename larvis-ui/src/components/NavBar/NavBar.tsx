@@ -28,7 +28,7 @@ export const NavBar = () => {
           </Button>
 
           <Button type="primary" icon={<LogoutOutlined />} onClick={logout}>
-            Logout
+            Log out
           </Button>
         </div>
       </Header>

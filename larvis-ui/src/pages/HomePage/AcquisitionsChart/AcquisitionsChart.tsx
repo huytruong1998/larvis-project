@@ -95,7 +95,7 @@ export const AcquisitionsChart = () => {
               stroke="#1890ff"
               strokeWidth={2}
               name="Ore deposits"
-              animationDuration={1000}
+              isAnimationActive={false}
             />
           </LineChart>
         </ResponsiveContainer>

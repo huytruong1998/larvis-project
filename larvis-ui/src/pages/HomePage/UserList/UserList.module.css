@@ -1,7 +1,7 @@
 .userListContainer {
-  max-width: 1000px;
   min-height: 280px;
   min-width: 280px;
+  max-height: 400px;
   margin: 0 auto;
   padding: 24px;
   height: 100%;
@@ -9,6 +9,8 @@
   flex-direction: column;
   justify-content: flex-start;
   background: #fff;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .userListTitle {

@@ -19,6 +19,7 @@ const updateUser = async (user: User) => {
     name: user.name,
     password: user.password,
   });
+
   return response.data;
 };
 
@@ -44,9 +45,10 @@ export const useUpdateUser = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (user: User) => updateUser(user),
-    onSuccess: () => {
+    onSuccess: (data: User) => {
       message.success('Successfully update user!');
       queryClient.invalidateQueries({ queryKey: ['users'] });
+      queryClient.invalidateQueries({ queryKey: ['user', data.user_id] });
     },
     onError: (error: AxiosError) => {
       const status = error.response?.status;

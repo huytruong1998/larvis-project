@@ -54,7 +54,7 @@ export const UserList = () => {
                   {user.name}
                 </Title>
                 <Text type="secondary" style={{ margin: 0 }}>
-                  ID: {user.user_id}
+                  User ID: {user.user_id}
                 </Text>
               </Card>
             </List.Item>

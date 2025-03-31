@@ -7,7 +7,7 @@ type Acquisition = {
   ore_sites: number;
 };
 
-export const getAcquisitions = async () => {
+const getAcquisitions = async () => {
   const res = await larvisServiceClient.get(`/acquisitions`);
   return res.data;
 };
