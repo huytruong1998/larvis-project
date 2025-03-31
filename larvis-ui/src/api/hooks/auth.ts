@@ -2,15 +2,15 @@ import larvisServiceClient from '@/api/larvisServiceClient';
 import { useAuthContext } from '@/contexts/authContext';
 import { message } from 'antd';
 
-interface LoginPayload {
+type LoginPayload = {
   user_id: string;
   password: string;
-}
+};
 
-interface LoginResponse {
+type LoginResponse = {
   userId: string;
   token: string;
-}
+};
 
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
@@ -25,13 +25,13 @@ export const loginUser = async (payload: LoginPayload): Promise<LoginResponse> =
 };
 
 export const useLoginUser = () => {
-  const { login: storeToken, setUserId } = useAuthContext();
+  const { login: storeToken, setCurrentUserId } = useAuthContext();
 
   return useMutation({
     mutationFn: (payload: LoginPayload) => loginUser(payload),
     onSuccess: (data) => {
       storeToken(data.token);
-      setUserId(data.userId);
+      setCurrentUserId(data.userId);
       message.success('Successfully logged in!');
     },
     onError: (error: AxiosError) => {
@@ -44,9 +44,4 @@ export const useLoginUser = () => {
       }
     },
   });
-};
-
-export const logoutUser = async () => {
-  const { logout: removeToken } = useAuthContext();
-  removeToken();
 };

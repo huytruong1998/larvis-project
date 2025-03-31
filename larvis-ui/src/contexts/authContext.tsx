@@ -5,22 +5,27 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 type AuthContextType = {
   accessToken: string | null;
   setAccessToken: (token: string | null) => void;
-  setUserId: (userId: string) => void;
+  setCurrentUserId: (userId: string) => void;
   login: (token: string) => void;
   logout: () => void;
-  userId: string | null;
+  currentUserId: string | null;
   isAuthenticated: boolean;
 };
 
 // avoid unwanted rerender?
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [userId, setuserId] = useState<string | null>(null);
+  const [currentUserId, setCurrentuserId] = useState<string | null>(null);
 
   useEffect(() => {
     const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('currentuserId');
     if (token) {
       setAccessToken(token);
+    }
+
+    if (userId) {
+      setCurrentuserId(userId);
     }
   }, []);
 
@@ -31,22 +36,24 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('currentuserId');
     setAccessToken(null);
-    setuserId(null);
+    setCurrentuserId(null);
   };
 
-  const setUserId = (userId: string) => {
-    setuserId(userId);
+  const setCurrentUserId = (userId: string) => {
+    sessionStorage.setItem('currentuserId', userId);
+    setCurrentuserId(userId);
   };
 
   const value = useMemo(
     () => ({
       accessToken,
       setAccessToken,
-      setUserId,
+      setCurrentUserId,
       login,
       logout,
-      userId,
+      currentUserId,
       isAuthenticated: !!accessToken,
     }),
     [accessToken],

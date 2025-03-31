@@ -18,7 +18,7 @@ export const UserList = () => {
 
       {isError && (
         <Alert
-          message={'Error loading Acquisitions data: ' + (error?.message || 'Undefined')}
+          message={'Error loading Users data: ' + (error?.message || 'Undefined')}
           type="error"
           showIcon
         />
@@ -61,6 +61,7 @@ export const UserList = () => {
       <Modal
         open={!!selectedUserId}
         onCancel={() => setSelectedUserId(null)}
+        destroyOnClose
         footer={null}
         centered
         className="custom-modal"
