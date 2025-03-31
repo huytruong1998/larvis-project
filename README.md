@@ -53,7 +53,7 @@ docker compose down
 
 ## How to use the Larvis UI
 
-When all container is running, go to [http://localhost:3000/login](http://localhost:3000/login) to login into Larvis service using 3 default users `alice`, `bob`, and `charlie`, with the default password, `1234`, other wise you can't use the service
+When all container is running, go to [http://localhost:3000/login](http://localhost:3000/login) to login into Larvis service using 3 default users `alice`, `bob`, and `charlie`, with the default password, `1234`, other wise you can't use the service and well be redirect to `http://localhost:3000/login`
 
 ### Larvis UI
 
@@ -70,4 +70,4 @@ There are 3 main component
 
 ## Report for Larvis improvement
 
-- The Time series data for `/acquisitions` is not sorted from backend. If this is production, Sorting at the database level (e.g., SQL ORDER BY timestamp DESC) is much faster than the client and the backend service also has more resources, also we can optimize it by caching the result rather then rely on JS to sort it in client side.
+- The Time series data for `/acquisitions` is not sorted from backend. If this is production with heavy data, Sorting at the database level (e.g., SQL ORDER BY timestamp DESC) is much faster than the client and the backend service also has more resources, also we can optimize it by caching the result rather then rely on JS to sort it in client side.
