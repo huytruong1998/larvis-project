@@ -5,7 +5,7 @@ export default async function login(
   username: string = 'alice',
   password: string = '1234',
 ) {
-  await page.goto('http://localhost:3000/login');
+  await page.goto('/login');
 
   await page.getByTestId('user-id-input').waitFor();
 

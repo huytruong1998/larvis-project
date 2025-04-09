@@ -1,0 +1,70 @@
+name: Larvis UI CI
+
+on:
+  push:
+    paths:
+      - "larvis-ui/**"
+  pull_request:
+    paths:
+      - "larvis-ui/**"
+
+jobs:
+  lint:
+    name: Lint and typecheck
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        working-directory: larvis-ui
+        run: yarn install --frozen-lockfile
+
+      - name: Run Lint and typecheck
+        shell: bash
+        working-directory: larvis-ui
+        run: yarn lint
+
+  tests:
+    timeout-minutes: 5
+    name: Run Tests
+    runs-on: ubuntu-22.04
+    needs: lint
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        working-directory: larvis-ui
+        run: yarn install --frozen-lockfile
+
+      - name: Run Unit Tests
+        working-directory: larvis-ui
+        run: yarn test --ci --coverage
+
+      - name: Install Playwright Browsers
+        working-directory: larvis-ui
+        run: yarn playwright install --with-deps
+
+      - name: Start Docker Compose
+        run: docker compose up -d
+
+      - name: Run Playwright E2E Tests
+        shell: bash
+        working-directory: larvis-ui
+        run: yarn test:e2e
+
+      - name: Stop Docker Compose
+        run: docker compose down

@@ -3,14 +3,14 @@ import login from '../utils';
 
 test.describe('Login function', () => {
   test('should redirect to login page without credential', async ({ page }) => {
-    await page.goto('http://localhost:3000');
-    await expect(page).toHaveURL('http://localhost:3000/login');
+    await page.goto('/');
+    await expect(page).toHaveURL('/login');
   });
 
   test('should login with correct user', async ({ page }) => {
     await login(page, 'bob', '1234');
     await expect(page).toHaveTitle('Larvis');
-    await expect(page).toHaveURL('http://localhost:3000');
+    await expect(page).toHaveURL('/');
   });
 
   test('should show error with incorrect user', async ({ page }) => {
@@ -27,10 +27,10 @@ test.describe('Login function', () => {
   test('should logout user', async ({ page }) => {
     await login(page);
     await expect(page).toHaveTitle('Larvis');
-    await expect(page).toHaveURL('http://localhost:3000');
+    await expect(page).toHaveURL('/');
 
     await page.getByTestId('logout-button').click();
 
-    await expect(page).toHaveURL('http://localhost:3000/login');
+    await expect(page).toHaveURL('/login');
   });
 });
