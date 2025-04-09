@@ -20,6 +20,7 @@ export default function NavBar() {
 
         <div className={styles.navbarActions}>
           <Button
+            data-testid="my-profile-button"
             icon={<UserOutlined />}
             onClick={() => setOpenMyProfile(true)}
             style={{ marginRight: 8 }}
