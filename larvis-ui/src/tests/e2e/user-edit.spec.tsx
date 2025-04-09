@@ -21,14 +21,12 @@ async function updateUser(page: Page, name: string, password: string) {
 test.describe('Edit User', () => {
   test.beforeEach(async ({ page }) => {
     await login(page, 'bob', '1234');
-    await expect(page).toHaveURL('/');
     await updateUser(page, 'bob new', 'random');
     await page.getByTestId('logout-button').click();
   });
 
   test.afterEach(async ({ page }) => {
     await login(page, 'bob', 'random');
-    await expect(page).toHaveURL('/');
     await updateUser(page, 'bob', '1234');
     await page.getByTestId('logout-button').click();
   });

@@ -7,12 +7,6 @@ services:
     ports:
       - "8080:8080"
     container_name: larvis-service
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
 
   larvis-ui:
     build:
@@ -29,12 +23,6 @@ services:
       - NODE_OPTIONS=--no-deprecation
       - CHOKIDAR_USEPOLLING=true
     command: ["yarn", "dev"]
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/login"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
 
 volumes:
   larvis_node_modules: {}
