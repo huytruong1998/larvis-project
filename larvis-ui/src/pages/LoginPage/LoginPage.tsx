@@ -53,7 +53,11 @@ function LoginPage() {
             name="userId"
             rules={[{ required: true, message: 'Enter your User ID' }]}
           >
-            <Input prefix={<UserOutlined />} placeholder="Enter User ID" />
+            <Input
+              data-testid="user-id-input"
+              prefix={<UserOutlined />}
+              placeholder="Enter User ID"
+            />
           </Form.Item>
 
           <Form.Item
@@ -61,11 +65,21 @@ function LoginPage() {
             name="password"
             rules={[{ required: true, message: 'Enter your password' }]}
           >
-            <Input.Password prefix={<LockOutlined />} placeholder="Enter password" />
+            <Input.Password
+              data-testid="password-input"
+              prefix={<LockOutlined />}
+              placeholder="Enter password"
+            />
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" block loading={isPending}>
+            <Button
+              data-testid="login-button"
+              type="primary"
+              htmlType="submit"
+              block
+              loading={isPending}
+            >
               {isPending ? 'Logging in...' : 'Login'}
             </Button>
           </Form.Item>

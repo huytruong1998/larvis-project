@@ -1,4 +1,3 @@
-/* eslint-env node */
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -15,11 +14,16 @@ module.exports = {
   ],
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
-    'prettier/prettier': ['error'],
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
     'linebreak-style': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -39,5 +43,5 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: ['node_modules', 'build', 'dist'],
+  ignorePatterns: ['node_modules', 'build', 'dist', '.eslintrc.cjs', '.jest.config.cjs'],
 };

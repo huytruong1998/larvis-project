@@ -27,7 +27,12 @@ export default function NavBar() {
             My Profile
           </Button>
 
-          <Button type="primary" icon={<LogoutOutlined />} onClick={logout}>
+          <Button
+            data-testid="logout-button"
+            type="primary"
+            icon={<LogoutOutlined />}
+            onClick={logout}
+          >
             Log out
           </Button>
         </div>
