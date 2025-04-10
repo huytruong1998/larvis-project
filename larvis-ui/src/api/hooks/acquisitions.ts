@@ -16,7 +16,7 @@ export default function useGetAcquisitions() {
   return useQuery<Acquisition[], AxiosError>({
     queryKey: ['acquisitions'],
     queryFn: getAcquisitions,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 10,
     retry: 1,
   });
 }
