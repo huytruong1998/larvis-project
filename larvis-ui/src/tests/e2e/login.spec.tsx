@@ -11,6 +11,7 @@ test.describe('Login function', () => {
     await login(page, 'bob', '1234');
     await expect(page).toHaveTitle('Larvis');
     await expect(page).toHaveURL('/');
+    await page.getByTestId('logout-button').click();
   });
 
   test('should show error with incorrect user', async ({ page }) => {
