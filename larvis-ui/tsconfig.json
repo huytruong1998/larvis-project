@@ -17,7 +17,7 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@myhelper/*": ["packages/myhelper/*"] // This mapping is relative to "baseUrl".
+      "src/*": ["src/*"]
     }
   },
   "include": [
