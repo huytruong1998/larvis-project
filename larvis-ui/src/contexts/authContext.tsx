@@ -1,6 +1,6 @@
 import { createContext, useState, ReactNode, useEffect, useContext, useMemo } from 'react';
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 type AuthContextType = {
   accessToken: string | null;

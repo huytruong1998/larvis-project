@@ -1,12 +1,13 @@
-import { Button, Modal } from 'antd';
-import { Header } from 'antd/es/layout/layout';
+import { Button, Modal, Layout, Typography } from 'antd';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
-import Title from 'antd/es/typography/Title';
 
 import { useState } from 'react';
 import { useAuthContext } from 'src/contexts/authContext';
 import ProfileCard from 'src/components/ProfileCard/ProfileCard';
 import styles from './NavBar.module.css';
+
+const { Header } = Layout;
+const { Title } = Typography;
 
 export default function NavBar() {
   const { logout, currentUserId } = useAuthContext();

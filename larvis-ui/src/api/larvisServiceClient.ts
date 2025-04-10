@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestHeaders, InternalAxiosRequestConfig } from 'axios';
 
-const apiUrl = import.meta.env.VITE_LARVIS_SERVICE_API;
+const apiUrl = process.env.LARVIS_SERVICE_API;
 const larvisServiceClient: AxiosInstance = axios.create({
   baseURL: apiUrl || 'http://localhost:8080',
 });

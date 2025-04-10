@@ -1,9 +1,10 @@
-import { Col, Row } from 'antd';
-import { Content } from 'antd/es/layout/layout';
+import { Col, Row, Layout } from 'antd';
 
 import AcquisitionsChart from './AcquisitionsChart/AcquisitionsChart';
 import UserList from './UserList/UserList';
 import styles from './HomePage.module.css';
+
+const { Content } = Layout;
 
 function HomePage() {
   return (
